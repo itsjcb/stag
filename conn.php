@@ -3,7 +3,7 @@ try{
     $pdo = new PDO("mysql:host=localhost;dbname=management","root","");
     echo "Successfully connected to the database";
     echo "<br />";
-    echo "Jacob";
+    echo "Jacob Guirou";
 
 }catch(Exception $e){
     die('Error:' . $e->getMessage());
