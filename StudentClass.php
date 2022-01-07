@@ -11,12 +11,12 @@ class StudentClass{
        $this->_db = $db;
     }
     #se connecter
-    public login($username, $password)
+    /*public login($username, $password)
     {   
-
-    }
+       //
+    }*/
     #l'emploi du temps
-    public function getSchedule($nom,$Nom,$idProf,$Debut,$Fin,$numGroupe,$nomCours)
+    public function getSchedule($nom)
     {
         
         $req=$this->_db->query("SELECT jours.Nom,professeur.idProf,heures.Debut,heures.Fin, groupe.numGroupe, cours.nomCours
@@ -33,13 +33,26 @@ class StudentClass{
 
     }
     #ses camarades de classe: qui ont le meme idgroupe
-    public function StudentList()
+    public function StudentList($numGroupe)
     {
-        $req = $this->_db("SELECT nom FROM Personne, GroupeEtudiant, Groupe, Etudiant WHERE idGroupe = " .$idGroupe);
+        $req=$this->_db->query("SELECT Personne.nom, Groupe.numGroupe
+        FROM Personne, Etudiant, Groupe, GroupeEtud
+        Where personne.role='etudiant' and numGroupe = '".$numGroupe."'  and
+            personne.idPersonne = Etudiant.idPersonne and
+            groupeEtud.idEtud = Etudiant.idEtudiant and
+            groupeEtud.idGroupe = Groupe.idGroupe");
+        $data= $req->fetch(PDO::FETCH_ASSOC); 
     }
     #liste des groupes dont il fait partie
-    public function GroupList($username, $password)
+    public function GroupList($numGroupe)
     {
+        $req=$this->_db->query("SELECT Personne.nom, Groupe.numGroupe
+        FROM Personne, Etudiant, Groupe, GroupeEtud
+        Where personne.role='etudiant' and numGroupe = '".$numGroupe."'  and
+            personne.idPersonne = Etudiant.idPersonne and
+            groupeEtud.idEtud = Etudiant.idEtudiant and
+            groupeEtud.idGroupe = Groupe.idGroupe");
+        $data= $req->fetch(PDO::FETCH_ASSOC);   
 
     }
     #les cours qu'il suit
