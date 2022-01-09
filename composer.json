@@ -1,0 +1,15 @@
+{
+    "name": "rt/stage",
+    "description": "Projet stage",
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/"
+
+        }
+    },
+    "authors": [{
+        "name": "Jacob",
+        "email": "israelguirou7@gmail.com"
+    }],
+    "require": {}
+}
